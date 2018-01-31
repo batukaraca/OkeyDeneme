@@ -1,0 +1,209 @@
+package Okey;
+import java.util.ArrayList;
+import java.util.Random;
+
+public class OkeyOyun {
+
+	public static void main(String[] args) {
+		int a ,b ;
+		int tas1,tas2,tas3,tas4;
+		int oyun1 =14,oyun2= 14,oyun3= 14,oyun4 = 14;
+
+	ArrayList <Integer> taslar  = new ArrayList <>();
+	ArrayList <Integer> oyuncu1 = new ArrayList <>();
+	ArrayList <Integer> oyuncu2 = new ArrayList <>();
+	ArrayList <Integer> oyuncu3 = new ArrayList <>();
+	ArrayList <Integer> oyuncu4 = new ArrayList <>();
+	int gosterge;
+	
+	Random r = new Random();
+		
+	for(int i=0 ; i<106 ; i++){
+		
+		if(0<=i && i<13 || 52<=i && i<64){
+			a = i%13;
+			taslar.add(a);
+				
+		}
+		if(13<=i && i<26 || 65<=i && i<78){
+			a = (i%13)+13;
+			taslar.add(a);
+			
+		}
+		if(26<=i && i<39 || 78<=i && i<91){
+			a = (i%13)+26;
+			taslar.add(a);
+			
+		}
+		if(39<=i && i<52 || 91<=i && i<104){
+			a = (i%13)+39;
+			taslar.add(a);
+			
+		}
+		if(104 <= i && i < 106){			
+			taslar.add(i);
+			
+		}
+	}
+			
+		gosterge = r.nextInt(taslar.size()/2 );
+		taslar.set(gosterge, gosterge );
+		taslar.set(gosterge + 51 , gosterge );
+	    System.out.println("Gosterge: " + taslar.get(gosterge ));	    
+		taslar.set(gosterge + 1, gosterge + 1);
+		taslar.set(gosterge + 52, gosterge + 1);
+		System.out.println("Okey    : " + taslar.get(gosterge + 1));
+		
+					
+		for (int i = 0 ; i<14 ; i++){			
+			do{
+				  tas1 = r.nextInt(taslar.size());
+				  tas2 = r.nextInt(taslar.size());
+				  tas3 = r.nextInt(taslar.size());
+				  tas4 = r.nextInt(taslar.size());
+				  
+			}while( (tas1==tas2) || (tas2==tas3) || (tas1==tas4) ||
+					(tas2==tas4) || (tas3==tas4) || (tas1==tas3) || 
+					(taslar.get(tas1) == 200) || (taslar.get(tas2) == 200) || 
+					(taslar.get(tas3) == 200) || (taslar.get(tas4) == 200));
+			 
+			
+			oyuncu1.add(taslar.get(tas1));
+			oyuncu2.add(taslar.get(tas2));
+			oyuncu3.add(taslar.get(tas3));
+			oyuncu4.add(taslar.get(tas4));
+			
+			taslar.set(tas1, 200);			
+			taslar.set(tas2, 200);			
+			taslar.set(tas3, 200);			
+			taslar.set(tas4, 200);			
+		}	
+		
+		 b = r.nextInt(4);
+		 
+		switch(b){
+		
+			case 0: do{
+			 tas1 = r.nextInt(taslar.size());
+				}while(taslar.get(tas1)==200);		
+					oyuncu1.add(taslar.get(tas1));
+				break;
+				
+			case 1: do{
+			 tas2 = r.nextInt(taslar.size());
+				}while(taslar.get(tas2)==200);		
+					oyuncu2.add(taslar.get(tas2));
+				break;
+				
+			case 2: do{
+			 tas3 = r.nextInt(taslar.size());
+				}while(taslar.get(tas3)==200);	
+					oyuncu3.add(taslar.get(tas3));
+				break;
+				
+			case 3: do{
+			 tas4 = r.nextInt(taslar.size());
+				}while(taslar.get(tas4)==200);		
+					oyuncu4.add(taslar.get(tas4));
+				break;
+				
+			default:
+				break;
+		}
+		
+				System.out.println("1. Oyuncu : " + oyuncu1);
+				System.out.println("2. Oyuncu : " + oyuncu2);
+				System.out.println("3. Oyuncu : " + oyuncu3);
+				System.out.println("4. Oyuncu : " + oyuncu4);
+		
+				if(oyuncu1.contains(taslar.get(gosterge + 1)))					
+						oyun1-=2;
+				if(oyuncu2.contains(taslar.get(gosterge + 1)))					
+						oyun2-=2;
+				if(oyuncu3.contains(taslar.get(gosterge + 1)))						
+						oyun3-=2;
+				if(oyuncu4.contains(taslar.get(gosterge + 1)))						
+						oyun4-=2;
+				
+				for(int i= 0; i<oyuncu1.size(); i++){
+					for(int j = 0; j<oyuncu1.size(); j++){
+						for(int k = 0; k<oyuncu1.size(); k++){
+						if((oyuncu1.get(i)!= (oyuncu1.get(j)))
+								&&(oyuncu1.get(i)!= (oyuncu1.get(k)))
+								&&(oyuncu1.get(k)!= (oyuncu1.get(j)))
+								&& (oyuncu1.get(i)<105)){
+						if(oyuncu1.get(i) == (oyuncu1.get(j)%13))
+							oyun1--;
+						if(oyuncu1.get(i) == (oyuncu1.get(k)%13))
+							oyun1--;
+							}
+						}
+					}
+				}
+				
+				for(int i= 0; i<oyuncu2.size(); i++){
+					for(int j = 0; j<oyuncu2.size(); j++){
+						for(int k = 0; k<oyuncu2.size(); k++){
+						if((oyuncu2.get(i)!= (oyuncu2.get(j)))
+								&&(oyuncu2.get(i)!= (oyuncu2.get(k)))
+								&&(oyuncu2.get(k)!= (oyuncu2.get(j)))
+								&& (oyuncu2.get(i)<105)){
+						if(oyuncu2.get(i) == (oyuncu2.get(j)%13))
+							oyun2--;
+						if(oyuncu2.get(i) == (oyuncu2.get(k)%13))
+							oyun2--;
+							}
+						}
+					}
+				}
+				
+				for(int i= 0; i<oyuncu3.size(); i++){
+					for(int j = 0; j<oyuncu3.size(); j++){
+						for(int k = 0; k<oyuncu3.size(); k++){
+						if((oyuncu3.get(i)!= (oyuncu3.get(j)))
+								&&(oyuncu3.get(i)!= (oyuncu3.get(k)))
+								&&(oyuncu3.get(k)!= (oyuncu3.get(j)))
+								&& (oyuncu3.get(i)<105)){
+						if(oyuncu3.get(i) == (oyuncu3.get(j)%13))
+							oyun3--;
+						if(oyuncu3.get(i) == (oyuncu3.get(k)%13))
+							oyun3--;
+							}
+						}
+					}
+				}
+				
+				for(int i= 0; i<oyuncu4.size(); i++){
+					for(int j = 0; j<oyuncu4.size(); j++){
+						for(int k = 0; k<oyuncu4.size(); k++){
+						if((oyuncu4.get(i)!= (oyuncu4.get(j)))
+								&&(oyuncu4.get(i)!= (oyuncu4.get(k)))
+								&&(oyuncu4.get(k)!= (oyuncu4.get(j)))
+								&& (oyuncu4.get(i)<105)){
+						if(oyuncu4.get(i) == (oyuncu4.get(j)%13))
+							oyun4--;
+						if(oyuncu4.get(i) == (oyuncu4.get(k)%13))
+							oyun4--;
+							}
+						}
+					}
+				}
+							
+					if(oyun1< oyun2)
+						if(oyun1< oyun3)
+							if(oyun1 < oyun4)			
+								System.out.println("Kazanan El : " + oyuncu1);
+					if(oyun2< oyun1)
+						if(oyun2< oyun3)
+							if(oyun2 < oyun4)			
+								System.out.println("Kazanan El : " + oyuncu2);
+					if(oyun3< oyun1)
+						if(oyun3< oyun2)
+							if(oyun3 < oyun4)			
+								System.out.println("Kazanan El : " + oyuncu3);
+					if(oyun4< oyun2)
+						if(oyun4< oyun3)
+							if(oyun4 < oyun1)			
+								System.out.println("Kazanan El : " + oyuncu4);		
+	}
+}
